@@ -8,11 +8,6 @@ This patcher is designed to simplify the patching steps of the Synology MediaSer
 - DSM 6.2.2-24922 Update 4 (and above)
 - SynoCommunity ffmpeg 4.2.1-23 (and above) ([help](https://synocommunity.com/#easy-install))
 
-## Supported / Unsupported scenarios
-- [DTS or EAC3 or TrueHD] + [Any non HEVC standard video format]: ✅
-- [no DTS, no EAC3, no TrueHD] + [HEVC]: ✅
-- [DTS or EAC3 or TrueHD] + [HEVC]: ⚠️ Not working on architectures where Advanced Media Extensions uses GStreamer for audio decoding (Please don't submit any more issue related to this scenario, I'm working on it, see [#33](https://github.com/AlexPresso/VideoStation-FFMPEG-Patcher/pull/33))
-
 ## Instructions
 - Check that you meet the required [dependencies](https://github.com/AlexPresso/mediaserver-ffmpeg-patcher#dependencies)
 - Install SynoCommunity ffmpeg ([help](https://synocommunity.com/#easy-install))
