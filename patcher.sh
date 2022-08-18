@@ -9,7 +9,7 @@ repo_base_url="https://github.com/AlexPresso/mediaserver-ffmpeg-patcher"
 version="1.0"
 action="patch"
 branch="main"
-dependencies=("ffmpeg")
+dependencies=("MediaServer" "ffmpeg")
 wrappers=("ffmpeg")
 
 ms_path=/var/packages/MediaServer/target
@@ -27,18 +27,6 @@ function info() {
 }
 function error() {
   log "ERROR" "$1"
-}
-
-function welcome_motd() {
-  info "ffmpeg-patcher v$version"
-
-  motd=$(curl -s -L "$repo_base_url/blob/$branch/motd.txt?raw=true")
-  if [ "${#motd}" -ge 1 ]; then
-    log "Message of the day"
-    echo ""
-    echo "$motd"
-    echo ""
-  fi
 }
 
 function restart_packages() {
@@ -116,7 +104,6 @@ while getopts a:b: flag; do
   esac
 done
 
-welcome_motd
 check_dependencies
 
 info "You're running DSM $dsm_version"
