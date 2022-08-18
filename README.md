@@ -14,6 +14,7 @@ This patcher is designed to simplify the patching steps of the Synology MediaSer
 - Connect to your NAS using SSH (admin user required) ([help](https://www.synology.com/en-global/knowledgebase/DSM/tutorial/General_Setup/How_to_login_to_DSM_with_root_permission_via_SSH_Telnet))
 - Use the command `sudo -i` to switch to root user
 - Use the [following](https://github.com/AlexPresso/mediaserver-ffmpeg-patcher#usage) command (Basic command) to execute the patch
+- Enable audio transcoding in MediaServer settings
 - You'll have to re-run the patcher everytime you update MediaServer and DSM
 
 ## Usage
