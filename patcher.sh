@@ -29,18 +29,31 @@ function error() {
   log "ERROR" "$1"
 }
 
+function root_check() {
+  if [[ "$EUID" -ne 0 ]]; then
+    error "This tool needs root access (please run 'sudo -i' before proceeding)."
+    exit 1
+  fi
+}
+
 function restart_packages() {
   info "Restarting MediaServer..."
   synopkg restart MediaServer
 }
 
 function check_dependencies() {
+  missingDeps=false
+
   for dependency in "${dependencies[@]}"; do
     if [[ ! -d "/var/packages/$dependency" ]]; then
       error "Missing $dependency package, please install it and re-run the patcher."
-      exit 1
+      missingDeps=true
     fi
   done
+
+  if [[ $missingDeps ]]; then
+    exit 1
+  fi
 }
 
 ################################
@@ -96,6 +109,9 @@ function unpatch() {
 ################################
 # ENTRYPOINT
 ################################
+root_check
+check_dependencies
+
 while getopts a:b: flag; do
   case "${flag}" in
     a) action=${OPTARG};;
@@ -103,8 +119,6 @@ while getopts a:b: flag; do
     *) echo "usage: $0 [-a patch|unpatch] [-b branch]" >&2; exit 1;;
   esac
 done
-
-check_dependencies
 
 info "You're running DSM $dsm_version"
 
